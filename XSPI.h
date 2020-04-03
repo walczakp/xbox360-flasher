@@ -2,7 +2,7 @@
 #define _XSPI_H_
 
 #include <inttypes.h>
-#include "Arduino.h"
+#include <Arduino.h>
 
 #define EJ		19
 #define	XX		17
@@ -14,10 +14,10 @@
 #define PINOUT(PIN)	  pinMode(PIN, OUTPUT)
 #define PININ(PIN)		  pinMode(PIN, INPUT_PULLDOWN)
 
-#define PINHIGH(PIN)	digitalWrite(PIN, HIGH)
-#define PINLOW(PIN)	  digitalWrite(PIN, LOW)
+#define PINHIGH(PIN)	digitalWriteFast(PIN, HIGH)
+#define PINLOW(PIN)	  digitalWriteFast(PIN, LOW)
 
-#define	PINGET(PIN)   digitalRead(PIN)
+#define	PINGET(PIN)   digitalReadFast(PIN)
 
 #define _delay_ms(MS)       delay(MS)
 
