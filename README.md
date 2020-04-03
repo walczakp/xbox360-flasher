@@ -10,6 +10,6 @@ Tested only on 16MB flash Trinity, don't know if it will behave on any other con
 
 Included a modified version of XFlash script to use serial communication.
 
-Modify your pinout in XSPI.h if needed.
+Modify your pinout in XSPI.h if needed. I used 100 ohm resistors on SCK, SS and MOSI.
 
 **Highly experimental, YMMV. Use only if you know what you're doing!**
