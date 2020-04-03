@@ -78,7 +78,7 @@ void StartFlashRead(uint32_t startPage, uint32_t len) {
         {
             STATUS = XNAND_StartRead(nextPage);
             nextPage++;
-            wordsLeft = 0x84;
+            wordsLeft = 0x210 / 4;
             buff_ptr = PAGE_BUFFER;
         }
         
@@ -95,12 +95,14 @@ void StartFlashRead(uint32_t startPage, uint32_t len) {
     }
 }
 
-void StartFlashRead(uint32_t startPage, uint32_t len) {
+void StartFlashWrite(uint32_t startPage, uint32_t len) {
     STATUS = XNAND_Erase(startPage);
     XNAND_StartWrite();
 
+    uint8_t* buff_ptr = PAGE_BUFFER;
     uint32_t wordsLeft = 0;
     uint32_t nextPage = startPage;
+    
     len /= 4;
     while(len)
     {
@@ -108,21 +110,24 @@ void StartFlashRead(uint32_t startPage, uint32_t len) {
         
         if(!wordsLeft)
         {
-            nextBlock++;
-            wordsLeft = 0x84;
+            while (USBSERIAL.available() < 0x210) {}
+            USBSERIAL.readBytes((char*)PAGE_BUFFER, 0x210);
+            
+            buff_ptr = PAGE_BUFFER;
+            wordsLeft = 0x210 / 4;
         }
         
         writeNow = (len < wordsLeft) ? len : wordsLeft;
-        XNAND_WriteProcess(buffer, writeNow);
-        
-        buffer += (writeNow*4);
+        XNAND_WriteProcess(buff_ptr, writeNow);
+
+        buff_ptr += (writeNow*4);
         wordsLeft -= writeNow;
         len -= writeNow;
         
         //execute write if buffer in NAND controller is filled
         if(!wordsLeft)
         {
-            STATUS = XNAND_WriteExecute(nextBlock-1);
+            STATUS = XNAND_WriteExecute(nextPage++);
             XNAND_StartWrite();
         }
     }
