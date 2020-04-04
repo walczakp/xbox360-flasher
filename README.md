@@ -15,3 +15,7 @@ Modify your pinout in XSPI.h if needed. I used 100 ohm resistors on SCK, SS and 
 Also, what's might be useful - steps I used to program my glitch chip using Raspberry Pi, which I also happen to have lying around: [RPI-XSPF.md](RPI-XSVF.md)
 
 **Highly experimental, YMMV. You're on your own. Use only if you know what you're doing!**
+
+![picture of teensy flashing the xbox](picrel.jpg)
+
+
