@@ -125,6 +125,9 @@ class XFlash:
 
 def main(argv):
     parser = argparse.ArgumentParser(description='XBox 360 NAND Flasher')
+    parser.add_argument('port', metavar='port', type=str,
+                        help='serial port for comms (e.g. COM5 or /dev/ttyUSB0)')
+
     subparsers = parser.add_subparsers(title='Operations', dest='action')
 
     parser_read = subparsers.add_parser('read', help='Dumps an image from the NAND')
@@ -141,22 +144,22 @@ def main(argv):
     parser_write.add_argument('end', nargs='?', metavar='end', action='store', type=int, default=0x400,
                               help='The count of blocks to perform the action to')
 
-    parser_erase = subparsers.add_parser('erase', help='Erases blocks in the NAND')
-    parser_erase.add_argument('start', nargs='?', metavar='start', action='store', type=int, default=0,
-                              help='The block to start the action from')
-    parser_erase.add_argument('end', nargs='?', metavar='end', action='store', type=int, default=0x400,
-                              help='The count of blocks to perform the action to')
-
-    parser_update = subparsers.add_parser('update',
-                                          help='Jumps into the bootloader of the NAND Flashing device for updating the firmware')
-    parser_shutdown = subparsers.add_parser('shutdown', help='Shuts down the attached XBox 360')
-    parser_poweron = subparsers.add_parser('powerup', help='Powers up the attached XBox 360')
+    # parser_erase = subparsers.add_parser('erase', help='Erases blocks in the NAND')
+    # parser_erase.add_argument('start', nargs='?', metavar='start', action='store', type=int, default=0,
+    #                           help='The block to start the action from')
+    # parser_erase.add_argument('end', nargs='?', metavar='end', action='store', type=int, default=0x400,
+    #                           help='The count of blocks to perform the action to')
+    #
+    # parser_update = subparsers.add_parser('update',
+    #                                       help='Jumps into the bootloader of the NAND Flashing device for updating the firmware')
+    # parser_shutdown = subparsers.add_parser('shutdown', help='Shuts down the attached XBox 360')
+    # parser_poweron = subparsers.add_parser('powerup', help='Powers up the attached XBox 360')
 
     arguments = parser.parse_args(argv[1:])
 
     ui = ConsoleUI()
 
-    xf = XFlash("COM5")
+    xf = XFlash(arguments.port)
 
     if arguments.action in ('erase', 'write', 'read'):
         try:
