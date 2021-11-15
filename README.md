@@ -1,5 +1,5 @@
-# xbox360-teensy-flasher
-XBOX360 NAND reader/writer for Teensy, communicating with PC using USB Serial (with optional debug serial)
+# xbox360-flasher
+XBOX360 NAND reader/writer for Teensy (also working for RPi Pico, see below), communicating with PC using USB Serial (with optional debug serial)
 
 Based on the great work of G33KatWork: https://github.com/G33KatWork/XBox-360-AVR-flasher
 
@@ -16,8 +16,8 @@ Also, what's might be useful - steps I used to program my glitch chip using Rasp
 
 **Highly experimental, YMMV. You're on your own. Use only if you know what you're doing!**
 
-**Update 2021-11-15**
-![u/luhkius](https://www.reddit.com/user/luhkius/) on reddit did a great job of testing this code on Raspberry Pi Pico and managed to get this working with changes only to the pin numbering: https://www.reddit.com/r/360hacks/comments/qrjzzt/didnt_have_a_flasher_but_found_that_a_4_pi_pico/ - this makes the flasher even cheaper!
+**Update 2021-11-15:**
+![u/luhkius](https://www.reddit.com/user/luhkius/) on reddit did a great job of testing this code on the Raspberry Pi Pico and managed to get this working with changes only to the pin numbering: https://www.reddit.com/r/360hacks/comments/qrjzzt/didnt_have_a_flasher_but_found_that_a_4_pi_pico/ - this makes the flasher even cheaper!
 
 ![picture of teensy flashing the xbox](picrel.jpg)
 
